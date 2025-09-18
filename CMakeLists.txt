@@ -218,12 +218,15 @@ endif()
 #--------------------
 
 message(STATUS "Looking for yaml-cpp on system...")
+find_package(yaml_cpp_vendor)
 find_package(yaml-cpp CONFIG REQUIRED)
 if(TARGET yaml-cpp::yaml-cpp)
-	set(YAML_CPP_LIBRARIES "yaml-cpp::yaml-cpp")
+    message(STATUS "yaml-cpp found, version ${yaml-cpp_VERSION}")
+    set(YAML_CPP_LIBRARIES "yaml-cpp::yaml-cpp")
 endif()
 if(YAML_CPP_LIBRARIES STREQUAL "")
-	set(YAML_CPP_LIBRARIES "yaml-cpp") # Fix linking issue on MacOS with yaml-cpp 0.7.0
+    message(STATUS "yaml-cpp found, version ${yaml-cpp_VERSION}")
+    set(YAML_CPP_LIBRARIES "yaml-cpp") # Fix linking issue on MacOS with yaml-cpp 0.7.0
 endif ()
 
 #--------------------
